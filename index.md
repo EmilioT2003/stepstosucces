@@ -1,47 +1,74 @@
 ---
-title: StepsToSucces
 layout: default
+title: StepsToSucces
 nav_order: 1
-permalink: /
 ---
 
-<div style="text-align:center; padding:2rem 1rem; border-bottom:1px solid #eee;">
-  <h1 style="font-size:2.2rem; margin-bottom:.5rem; color:#111;">StepsToSucces</h1>
-  <p style="font-size:1.2rem; color:#444; max-width:650px; margin:0 auto;">
-    Ideas políticas y casos de éxito gubernamentales — datos, replicabilidad e impacto global.
+# 🌍 StepsToSucces
+**Mejores prácticas y casos de éxito gubernamentales.**  
+Datos, replicabilidad e impacto global.
+
+<div class="hero">
+  <p>
+    🔎 Usa la búsqueda para encontrar casos por país, sector o KPI.  
+    🗺️ Explora el Mapa interactivo.  
+    🏆 Revisa el Ranking.  
+    ✍️ ¿Tienes un caso? <a href="/propose/">Propón uno</a>.
   </p>
 </div>
 
-<div style="display:flex; justify-content:center; gap:1rem; margin:2rem 0; flex-wrap:wrap">
-  <a href="/map/" class="btn btn-primary">🗺️ Mapa</a>
-  <a href="/ranking/" class="btn btn-secondary">🏆 Ranking</a>
-  <a href="/cases/" class="btn btn-secondary">📚 Casos</a>
-  <a href="https://github.com/EmilioT2003/stepstosucces/issues/new" class="btn btn-outline">✍️ Propón uno</a>
-</div>
+---
 
-<style>
-.btn {
-  padding:.8rem 1.4rem; 
-  border-radius:6px; 
-  text-decoration:none; 
-  font-weight:600;
-}
-.btn-primary { background:#111; color:#fff; }
-.btn-secondary { background:#f3f3f3; color:#111; }
-.btn-outline { border:1px solid #111; color:#111; background:white; }
-.btn:hover { opacity:.85; }
-</style>
+## 🗺️ Mapa de Casos
+<div id="home-map"></div>
 
-<div style="max-width:700px; margin:2rem auto;">
-  <h2>Qué publicamos</h2>
-  <ul style="list-style:none; padding:0; line-height:1.8;">
-    <li>✅ Problema claro, intervención concreta</li>
-    <li>📊 KPIs con <strong>fechas</strong></li>
-    <li>🌍 Replicabilidad y costo aproximado</li>
-    <li>🔎 Fuentes verificables (mínimo 2)</li>
-  </ul>
-</div>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-<footer style="margin-top:3rem; padding:1rem; text-align:center; color:#777; font-size:.9rem; border-top:1px solid #eee;">
-  © 2025 StepsToSucces — Compartiendo innovación en políticas públicas.
-</footer>
+<script>
+// ===== Mini-mapa estilo profesional =====
+(function initMap(){
+  const el = document.getElementById('home-map');
+  if (!el) return;
+
+  const map = L.map(el, { zoomControl:true, scrollWheelZoom:false })
+               .setView([20,0], 2);
+
+  // Tiles claros tipo Carto "Positron"
+  L.tileLayer(
+    'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
+    { attribution: '&copy; OpenStreetMap &copy; CARTO', subdomains:'abcd', maxZoom:19 }
+  ).addTo(map);
+
+  // Pin SVG (azul sobrio)
+  const pin = L.divIcon({
+    className: 'pin',
+    html: `<svg viewBox="0 0 24 24" fill="#1f6feb" xmlns="http://www.w3.org/2000/svg">
+             <path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/>
+           </svg>`,
+    iconSize: [24,24],
+    iconAnchor: [12,24]
+  });
+
+  // Datos de casos (asegúrate que CASES esté definido en _data/cases.json)
+  const pts = [];
+  if (typeof CASES !== "undefined") {
+    CASES.filter(c => c.lat && c.lng).forEach(c => {
+      L.marker([c.lat, c.lng], {icon: pin})
+        .addTo(map)
+        .bindPopup(`<a href="${c.url}"><strong>${c.title}</strong></a><br><span class="sub">${c.pais||''}</span>`);
+      pts.push([c.lat, c.lng]);
+    });
+    if (pts.length) map.fitBounds(pts, { padding:[20,20] });
+  }
+})();
+</script>
+
+---
+
+## 📚 Explora
+- 👉 [Todos los Casos](/cases/)
+- 👉 [Mapa Completo](/map/)
+- 👉 [Ranking de Impacto](/ranking/)
+- 👉 [Propón un Caso](/propose/)
+
