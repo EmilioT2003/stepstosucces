@@ -23,15 +23,6 @@ lat: -30.0346
 lng: -51.2177
 ---
 # Introducción
-El Presupuesto Participativo de Porto Alegre (Orçamento Participativo, OP) es un proceso pionero...
-(blablabla — pegas TODO tu texto aquí tal cual, con subtítulos `## Contexto`, `## Resultados`, etc.)
-El Presupuesto Participativo de Porto Alegre (Orçamento Participativo, OP) es un proceso pionero de democracia participativa iniciado en 1989 en la ciudad de Porto Alegre, Brasil. Consiste en la involucración directa de miles de ciudadanos en la decisión sobre el destino de una parte sustancial del presupuesto municipal
-lincolninst.edu
-. Esta innovadora práctica de gobernanza local ha sido ampliamente reconocida internacionalmente como un caso emblemático de democracia participativa y gestión pública inclusiva. A lo largo de más de tres décadas, el OP de Porto Alegre ha pasado de ser una experiencia local experimental a inspirar modelos similares en cientos de ciudades del mundo, obteniendo premios internacionales (como el Premio Hábitat de la ONU en 1996) e impulsando debates sobre la “radicalización de la democracia”. Sin embargo, su trayectoria no ha estado exenta de desafíos: su evolución refleja tanto logros significativos en materia de inclusión social y mejoría de servicios, como también debilitamientos y retrocesos en años recientes.
-
-En este artículo se analiza el Presupuesto Participativo de Porto Alegre desde sus orígenes hasta la actualidad, con un enfoque académico y crítico. Se examina el contexto político, económico y social que dio origen al proceso en 1989, se describe la estructura y funcionamiento de este mecanismo participativo (actores, fases y reglas), se sintetizan los resultados observables a lo largo del tiempo (en infraestructura, servicios, equidad, transparencia, etc.), se discuten los cambios y desafíos enfrentados –incluyendo su reciente debilitamiento–, y se extraen lecciones aprendidas aplicables a otros contextos. La experiencia de Porto Alegre, considerada un “experimento de democracia directa” urbano, ofrece importantes reflexiones sobre las posibilidades y límites de la participación ciudadana en la gestión pública. A continuación, se desarrolla cada uno de estos aspectos apoyándose en fuentes académicas, documentos oficiales y análisis recientes.
-
-Contexto de surgimiento (1989): Democracia y desigualdad en Porto Alegre
 
 El Presupuesto Participativo de Porto Alegre nace en un momento histórico marcado por la transición democrática de Brasil y por condiciones locales de aguda desigualdad socioeconómica. Tras el fin de la dictadura militar (1964-1985), Brasil vivía un proceso de redemocratización y descentralización. En 1988 se promulgó una nueva Constitución que fortaleció la autonomía municipal y abrió espacios para la participación ciudadana. Sin embargo, décadas de autoritarismo habían dejado una herencia de desconfianza generalizada hacia la clase política y las instituciones públicas
 lincolninst.edu
