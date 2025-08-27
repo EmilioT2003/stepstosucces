@@ -1,23 +1,38 @@
 ---
-title: Mapa
 layout: default
-nav_order: 3
+title: "Mapa"
 permalink: /map/
+nav_order: 3
 ---
 
-<div id="map" style="height:560px;"></div>
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<div id="map" class="map"></div>
 
 <script>
-const cases = [
-{% for c in site.cases %}
-  { title: {{ c.title | jsonify }}, country: {{ c.pais | jsonify }}, url: "{{ c.url }}",
-    lat: {{ c.lat | default: 'null' }}, lng: {{ c.lng | default: 'null' }} },
-{% endfor %}
-];
-const map = L.map('map',{worldCopyJump:true}).setView([20,0],2);
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:6}).addTo(map);
-cases.filter(x=>typeof x.lat==='number' && typeof x.lng==='number')
-     .forEach(c=>L.marker([c.lat,c.lng]).addTo(map).bindPopup(`<a href="${c.url}">${c.title}</a><br>${c.country}`));
+document.addEventListener('DOMContentLoaded', function () {
+  const cases = [
+    {% for c in site.cases %}
+    {
+      title: {{ c.title | jsonify }},
+      country: {{ c.pais | jsonify }},
+      url: {{ c.url | relative_url | jsonify }},
+      lat: {{ c.lat | default: 'null' }},
+      lng: {{ c.lng | default: 'null' }}
+    }{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ];
+
+  const map = L.map('map', { worldCopyJump: true, scrollWheelZoom: false })
+               .setView([20, 0], 2);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap'
+  }).addTo(map);
+
+  cases
+    .filter(c => typeof c.lat === 'number' && typeof c.lng === 'number')
+    .forEach(c => {
+      L.marker([c.lat, c.lng]).addTo(map)
+        .bindPopup(`<a href="${c.url}">${c.title}</a><br>${c.country}`);
+    });
+});
 </script>
