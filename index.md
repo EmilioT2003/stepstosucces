@@ -1,4 +1,9 @@
 ---
+layout: home
+title: StepsToSucces
+permalink: /
+---
+---
 layout: default
 title: StepsToSucces
 nav_order: 1
