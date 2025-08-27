@@ -7,7 +7,7 @@ sector: ["Gobernanza","Participacion ciudadana"]
 
 anio_inicio: 1989
 anio_fin: 2025
-score: 0
+score: 44
 
 problema: "Desigualdad urbana, clientelismo y baja participacion en el gasto."
 intervencion: "Proceso anual de Presupuesto Participativo con asambleas barriales, delegados y criterios de inversión transparentes."
