@@ -5,16 +5,58 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <title>{{ page.title }} · {{ site.title }}</title>
+  {% assign meta_desc = page.resumen | default: "Caso de política pública en " | append: (page.pais | default: "") %}
+  <meta name="description" content="{{ meta_desc | strip | escape }}">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="{{ site.url }}{{ page.url }}">
+
+  <!-- Preconnect para mapas (performance) -->
+  <link rel="preconnect" href="https://unpkg.com" crossorigin>
+  <link rel="preconnect" href="https://{s}.tile.openstreetmap.org" crossorigin>
+
+  <!-- CSS principal -->
   <link rel="stylesheet" href="{{ '/assets/css/custom.css' | relative_url }}">
+
+  <!-- Leaflet -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:title" content="{{ page.title }} · {{ site.title }}">
+  <meta property="og:description" content="{{ meta_desc | strip | escape }}">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+  {% if page.og_image %}
+    <meta property="og:image" content="{{ site.url }}{{ page.og_image }}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="{{ site.url }}{{ page.og_image }}">
+  {% else %}
+    <meta name="twitter:card" content="summary">
+  {% endif %}
+
+  <!-- JSON-LD básico (Article) -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Article",
+    "headline": {{ page.title | jsonify }},
+    "about": {{ page.sector | default: site.title | jsonify }},
+    "inLanguage": "es",
+    "author": {{ page.curador | default: "Equipo StepsToSucces" | jsonify }},
+    "publisher": {"@type":"Organization","name": {{ site.title | jsonify }}},
+    "url": "{{ site.url }}{{ page.url }}",
+    "spatialCoverage": {{ page.pais | default: page.ciudad_region | jsonify }}
+  }
+  </script>
 </head>
 <body>
-  <header class="topbar">
+  <header class="topbar" role="banner">
     <div class="wrap">
       <a class="brand" href="{{ '/' | relative_url }}">StepsToSucces</a>
-      <nav class="nav">
+      <nav class="nav" aria-label="Principal">
         <a href="{{ '/' | relative_url }}">Mapa</a>
         <a href="{{ '/ranking/' | relative_url }}">Ranking</a>
         <a href="{{ '/cases/' | relative_url }}">Casos</a>
@@ -22,55 +64,166 @@
     </div>
   </header>
 
-  <main class="wrap">
-    <a class="back" href="{{ '/cases/' | relative_url }}">← Volver a casos</a>
+  <main class="wrap" id="main" role="main">
+    <nav class="breadcrumbs small" aria-label="Miga de pan">
+      <a href="{{ '/' | relative_url }}">Inicio</a> /
+      <a href="{{ '/cases/' | relative_url }}">Casos</a> /
+      <span aria-current="page">{{ page.title }}</span>
+    </nav>
+
     <h1 class="hero">{{ page.title }}</h1>
 
     {% assign anio_inicio = page.anio_inicio | default: page['año_inicio'] %}
     {% assign anio_fin    = page.anio_fin    | default: page['año_fin'] %}
 
-    <section class="card meta">
-      <div><strong>País:</strong> {{ page.flag }} {{ page.pais }} — {{ page.ciudad }}</div>
-      <div><strong>Sectores:</strong> {{ page.sector | join: ', ' }}</div>
-      <div><strong>Periodo:</strong> {{ anio_inicio }}–{{ anio_fin }}</div>
-      <div><strong>Score:</strong> {{ page.score }}</div>
-      {% if page.tags %}<div><strong>Tags:</strong> {{ page.tags | join: ', ' }}</div>{% endif %}
+    <!-- Meta chips -->
+    <section class="card meta" aria-labelledby="meta-titulo">
+      <h2 id="meta-titulo" class="sr-only">Metadatos del caso</h2>
+      <div class="chiprow">
+        {% if page.flag or page.pais or page.ciudad or page.ciudad_region %}
+          <span class="chip">📍
+            {% if page.flag %}{{ page.flag }} {% endif %}
+            {{ page.pais | default: "País ND" }}{% if page.ciudad %} — {{ page.ciudad }}{% endif %}{% if page.ciudad_region %} — {{ page.ciudad_region }}{% endif %}
+          </span>
+        {% endif %}
+
+        {% if page.sector %}
+          <span class="chip">🏷️ {{ page.sector | join: ', ' }}</span>
+        {% endif %}
+
+        {% if anio_inicio or anio_fin %}
+          <span class="chip">🗓️ {{ anio_inicio | default: "ND" }}{% if anio_fin %}–{{ anio_fin }}{% endif %}</span>
+        {% endif %}
+
+        {% if page.score %}
+          <span class="chip emphasis">⭐ Score: {{ page.score }}</span>
+        {% endif %}
+      </div>
     </section>
 
     {% if page.resumen %}
-    <section class="card">
-      <h2>Resumen</h2>
+    <section class="card" aria-labelledby="resumen-titulo">
+      <h2 id="resumen-titulo">Resumen</h2>
       <p>{{ page.resumen }}</p>
     </section>
     {% endif %}
 
+    {% if page.problema or page.intervencion or page.costo_aprox %}
+    <section class="card" aria-labelledby="detalle-titulo">
+      <h2 id="detalle-titulo">Detalle</h2>
+      <dl class="specs">
+        {% if page.problema %}<dt>Problema</dt><dd>{{ page.problema }}</dd>{% endif %}
+        {% if page.intervencion %}<dt>Intervención</dt><dd>{{ page.intervencion }}</dd>{% endif %}
+        {% if page.costo_aprox %}<dt>Costo aprox.</dt><dd>{{ page.costo_aprox }}</dd>{% endif %}
+      </dl>
+    </section>
+    {% endif %}
+
     {% if page.kpis %}
-    <section class="card">
-      <h2>KPIs</h2>
+    <section class="card" aria-labelledby="kpis-titulo">
+      <h2 id="kpis-titulo">KPIs</h2>
       <ul class="bullets">
         {% for k in page.kpis %}<li>{{ k }}</li>{% endfor %}
       </ul>
     </section>
     {% endif %}
 
-    <section class="card">
-      <h2>Mapa</h2>
-      <div id="map" class="map"></div>
+    {% if page.resultados %}
+    <section class="card" aria-labelledby="resultados-titulo">
+      <h2 id="resultados-titulo">Resultados</h2>
+      <ul class="bullets">
+        {% for r in page.resultados %}<li>{{ r }}</li>{% endfor %}
+      </ul>
     </section>
+    {% endif %}
+
+    <section class="card" aria-labelledby="mapa-titulo">
+      <h2 id="mapa-titulo">Mapa</h2>
+      <figure>
+        <div id="map" class="map" role="application" aria-label="Mapa del caso"></div>
+        {% if page.lat and page.lng %}
+          <figcaption class="small muted">Coordenadas: {{ page.lat }}, {{ page.lng }}</figcaption>
+        {% endif %}
+      </figure>
+    </section>
+
+    {% if page.fuentes %}
+    <section class="card" aria-labelledby="fuentes-titulo">
+      <h2 id="fuentes-titulo">Fuentes</h2>
+      <ul class="bullets">
+        {% for f in page.fuentes %}
+          <li><a href="{{ f }}" target="_blank" rel="noopener">Fuente {{ forloop.index }}</a></li>
+        {% endfor %}
+      </ul>
+    </section>
+    {% endif %}
+
+    {% comment %}
+      Relacionados por sector (coincidencia mínima 1)
+    {% endcomment %}
+    {% if page.sector %}
+      {% assign relacionados = site.cases | where_exp: "c", "c.url != page.url" %}
+      {% assign rel = "" | split: "" %}
+      {% for c in relacionados %}
+        {% assign inter = c.sector | intersection: page.sector %}
+        {% if inter and inter.size > 0 %}
+          {% assign rel = rel | push: c %}
+        {% endif %}
+      {% endfor %}
+      {% if rel.size > 0 %}
+      <section class="card" aria-labelledby="relacionados-titulo">
+        <h2 id="relacionados-titulo">Casos relacionados</h2>
+        <ul class="cases-list">
+          {% assign rel_sorted = rel | sort: "score" | reverse %}
+          {% for c in rel_sorted limit: 4 %}
+            <li class="case-item">
+              <a href="{{ c.url | relative_url }}">
+                <span class="flag">{% if c.flag %}{{ c.flag }}{% endif %}</span>
+                <span class="title">{{ c.title }}</span>
+                <span class="muted">{{ c.pais }} — {{ c.anio_inicio | default: c['año_inicio'] }}</span>
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </section>
+      {% endif %}
+    {% endif %}
+
+    <nav class="backrow">
+      <a class="back" href="{{ '/cases/' | relative_url }}">← Volver a casos</a>
+      <span class="spacer"></span>
+      <a class="back" href="{{ '/ranking/' | relative_url }}">Ver ranking →</a>
+    </nav>
   </main>
 
-  <footer class="footer">
+  <footer class="footer" role="contentinfo">
     © {{ site.time | date: "%Y" }} StepsToSucces.com
   </footer>
 
   <script>
-    document.addEventListener('DOMContentLoaded', function(){
-      const map = L.map('map',{scrollWheelZoom:false}).setView([{{ page.lat }}, {{ page.lng }}], 11);
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
+  document.addEventListener('DOMContentLoaded', function(){
+    var lat = {{ page.lat | default: 'null' }};
+    var lng = {{ page.lng | default: 'null' }};
+    if (typeof lat === 'number' && typeof lng === 'number') {
+      const map = L.map('map', { scrollWheelZoom:false }).setView([lat, lng], 11);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution:'© OpenStreetMap'
       }).addTo(map);
-      L.marker([{{ page.lat }}, {{ page.lng }}]).addTo(map).bindPopup("{{ page.title }}");
-    });
+      L.marker([lat, lng]).addTo(map).bindPopup({{ page.title | jsonify }});
+    } else {
+      const box = document.getElementById('map');
+      if (box) {
+        box.innerHTML = '<div class="muted small" style="padding:12px">Sin coordenadas para este caso.</div>';
+        box.style.display = 'grid';
+        box.style.placeItems = 'center';
+        box.style.background = 'var(--card, #f8fafc)';
+        box.style.border = '1px solid var(--border, #e5e7eb)';
+        box.style.borderRadius = '12px';
+        box.style.height = '160px';
+      }
+    }
+  });
   </script>
 </body>
 </html>
+
