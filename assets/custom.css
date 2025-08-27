@@ -117,3 +117,12 @@ a { color:var(--brand); }
 /* ===== Utilidades ===== */
 .sub { color:var(--muted); font-size:.92rem; }
 .center { text-align:center; }
+body { font-family: system-ui, sans-serif; margin:0; padding:0; background:#fff; color:#222; }
+header.hero { text-align:center; padding:2rem 1rem; background:#f9f9f9; }
+header.hero nav a { margin:0 .5rem; padding:.3rem .7rem; border:1px solid #ccc; border-radius:5px; text-decoration:none; }
+.grid { display:grid; grid-template-columns: 1fr 1fr; gap:2rem; padding:2rem; }
+.mapa { grid-column:1 / span 2; }
+.ranking, .casos { background:#fafafa; padding:1rem; border-radius:8px; }
+.case-card { border:1px solid #eee; padding:.5rem; margin:.3rem 0; border-radius:5px; }
+.flag { font-size:1.5rem; margin-right:.5rem; }
+
