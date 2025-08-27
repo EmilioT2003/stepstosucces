@@ -146,12 +146,17 @@ document.addEventListener('DOMContentLoaded', function(){
   if (!$ymax.placeholder) $ymax.placeholder = String(maxY);
 
   // ---------- Mapa ----------
-  const map = L.map('home-map', { scrollWheelZoom:false, worldCopyJump:true });
-  const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution:'© OpenStreetMap' });
-  tiles.addTo(map);
+// Mapa
+const map = L.map('map', { worldCopyJump: true, scrollWheelZoom: false });
 
-  const clusters = L.markerClusterGroup({ showCoverageOnHover:false, maxClusterRadius:50 });
-  clusters.addTo(map);
+L.tileLayer(
+  'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', 
+  {
+    attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ',
+    maxZoom: 16
+  }
+).addTo(map);
+
 
   // Crear marcadores una sola vez (y los reutilizamos)
   const markers = CASES
