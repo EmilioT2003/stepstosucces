@@ -1,28 +1,82 @@
-/* Tipografía y layout */
-:root { --maxw: 1040px; }
-.main-content { max-width: var(--maxw); }
-.hero { padding: 3rem 0 2rem; border-bottom: 1px solid #e5e5e5; }
-.hero h1 { font-size: 2.2rem; margin: 0 0 .5rem; letter-spacing: .2px; }
-.tagline { font-size: 1.05rem; color: #555; max-width: 720px; }
+/* ===== Variables y tipografía base ===== */
+:root {
+  --ink:#111;         /* texto principal */
+  --muted:#6b7280;    /* texto secundario */
+  --line:#e5e7eb;     /* bordes sutiles */
+  --pill:#f3f4f6;     /* chips */
+  --brand:#1f6feb;    /* acento (pines/botones) */
+}
+html { scroll-behavior:smooth; }
+body { color:var(--ink); }
 
-/* Botones */
-.btn { display:inline-block; padding:.6rem 1rem; margin:.3rem .4rem .3rem 0; 
-  border-radius:6px; border:1px solid #111; text-decoration:none; }
-.btn:hover { transform: translateY(-1px); }
-.btn { background:#111; color:#fff; }
-.btn-outline { background:#fff; color:#111; }
+/* Títulos con aire editorial */
+h1, h2 { font-family: Georgia, "Times New Roman", serif; letter-spacing:-.02em; }
+h1 { line-height:1.05; }
+a { color:var(--brand); }
 
-/* Listas y tablas */
-.main-content ul { line-height: 1.5; }
-table { width:100%; }
+/* ===== Hero (encabezado de portada) ===== */
+.hero {
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:1.2rem 1rem;
+  background:#fff;
+  box-shadow:0 1px 0 rgba(0,0,0,.03);
+  margin: .5rem 0 1rem;
+}
+.hero p { margin:.2rem 0; color:#374151; }
 
-/* Logo opcional: reducir */
-.site-logo img { height: 28px !important; }
-/* Home mini-map */
-#home-map { height: 340px; border-radius:12px; border:1px solid #e5e7eb; overflow:hidden; }
-#home-map .leaflet-control-zoom a { border-radius:8px; }
+/* ===== Botones reutilizables (si los usas en portada/nav) ===== */
+.btn {
+  display:inline-block; padding:.7rem 1.1rem; border-radius:8px;
+  font-weight:600; text-decoration:none; border:1px solid var(--ink);
+  color:var(--ink); background:#fff; transition:transform .05s ease, opacity .15s;
+}
+.btn:hover { opacity:.9; transform: translateY(-1px); }
+.btn-dark { background:var(--ink); color:#fff; border-color:var(--ink); }
+.btn.small { padding:.4rem .6rem; border-radius:6px; }
+
+/* ===== Chips / pills ===== */
+.pill {
+  display:inline-block; background:var(--pill); color:#374151;
+  border-radius:999px; padding:.15rem .5rem; font-size:.8rem;
+}
+
+/* ===== Mapa mini de portada ===== */
+#home-map {
+  height: 340px; border-radius:12px; border:1px solid var(--line);
+  overflow:hidden; margin: .6rem 0 1.2rem;
+}
+/* Look en grises elegante (para tiles raster) */
 #home-map.gmono .leaflet-tile { filter: grayscale(100%) contrast(1.05) brightness(1.06); }
 
-/* Pin SVG */
-.pin { transform: translate(-12px,-24px); } /* ancla */
-.pin svg { width:24px; height:24px; }
+/* Controles Leaflet */
+.leaflet-top.leaflet-right .leaflet-bar {
+  background:#fff; border:1px solid var(--line); border-radius:8px; overflow:hidden;
+}
+.leaflet-control-zoom a { border-radius:8px !important; }
+
+/* Pin SVG consistente con el brand */
+.pin { transform: translate(-12px,-24px); }                 /* ancla visual */
+.pin svg { width:24px; height:24px; display:block;
+  filter: drop-shadow(0 1px 0 rgba(0,0,0,.15));
+  transition: transform .08s ease, filter .08s ease;
+}
+.leaflet-marker-icon:hover svg { transform: translateY(-1px); }
+
+/* Popups elegantes */
+.leaflet-popup-content { margin: .6rem .6rem .5rem; }
+.popup-card { font: 14px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; }
+.popup-card .ttl { color:#111; text-decoration:none; }
+.popup-card .meta { color:var(--muted); margin:.2rem 0 .6rem; }
+.popup-card .row { margin:.25rem 0 .6rem; }
+
+/* ===== Tarjetas (listas de casos/ranking si las usas) ===== */
+.card {
+  background:#fff; border:1px solid var(--line); border-radius:12px;
+  padding:.9rem; box-shadow:0 1px 0 rgba(0,0,0,.03);
+}
+.card + .card { margin-top:.6rem; }
+
+/* ===== Utilidades ===== */
+.sub { color:var(--muted); font-size:.92rem; }
+.center { text-align:center; }
