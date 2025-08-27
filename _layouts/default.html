@@ -5,35 +5,116 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{ page.title | default: site.title }}</title>
 
-  <!-- Fuentes opcionales -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+  {% assign meta_title = page.title | default: site.title %}
+  {% assign meta_desc  = page.description | default: page.resumen | default: site.description | default: "Repositorio global de casos de políticas públicas exitosas." %}
+
+  <title>{{ meta_title }} · {{ site.title }}</title>
+  <meta name="description" content="{{ meta_desc | strip | escape }}">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="{{ site.url }}{{ page.url }}">
+
+  <!-- Favicons / Manifest (opcional si los tienes) -->
+  {% if site.favicon %}<link rel="icon" href="{{ site.favicon | relative_url }}">{% endif %}
+  {% if site.manifest %}<link rel="manifest" href="{{ site.manifest | relative_url }}">{% endif %}
+
+  <!-- Fuentes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
 
-  <!-- Tu CSS -->
+  <!-- CSS principal -->
   <link rel="stylesheet" href="{{ '/assets/css/custom.css' | relative_url }}">
 
-  <!-- Leaflet (mapa) -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-  <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <!-- Carga Leaflet solo si la página lo pide -->
+  {% if page.use_leaflet or layout.use_leaflet or page.url == '/' or page.url contains '/map' %}
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+    <link rel="preconnect" href="https://{s}.tile.openstreetmap.org" crossorigin>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  {% endif %}
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:title" content="{{ meta_title }} · {{ site.title }}">
+  <meta property="og:description" content="{{ meta_desc | strip | escape }}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+  {% if page.og_image %}
+    <meta property="og:image" content="{{ site.url }}{{ page.og_image }}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="{{ site.url }}{{ page.og_image }}">
+  {% else %}
+    <meta name="twitter:card" content="summary">
+  {% endif %}
+
+  <!-- JSON-LD: WebSite + Organization -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebSite",
+    "name": {{ site.title | jsonify }},
+    "url": "{{ site.url }}",
+    "publisher": {
+      "@type": "Organization",
+      "name": {{ site.title | jsonify }}
+    },
+    "inLanguage": "es"
+  }
+  </script>
+
+  {% if site.ga_id %}
+  <!-- Analytics (opcional) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.ga_id }}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date()); gtag('config', '{{ site.ga_id }}');
+  </script>
+  {% endif %}
 </head>
 <body>
-  <header class="topbar">
+  <!-- Skip link -->
+  <a class="sr-only focusable" href="#main">Saltar al contenido</a>
+
+  <header class="topbar" role="banner">
     <div class="wrap">
       <a class="brand" href="{{ '/' | relative_url }}">StepsToSucces</a>
-      <nav class="nav">
-        <a href="{{ '/' | relative_url }}">Mapa</a>
-        <a href="{{ '/ranking/' | relative_url }}">Ranking</a>
-        <a href="{{ '/cases/' | relative_url }}">Casos</a>
-        <a href="{{ '/proponer/' | relative_url }}">Proponer</a>
+      <nav class="nav" aria-label="Principal">
+        {% assign here = page.url %}
+        <a href="{{ '/' | relative_url }}" class="{% if here == '/' %}active{% endif %}">Mapa</a>
+        <a href="{{ '/ranking/' | relative_url }}" class="{% if here contains '/ranking/' %}active{% endif %}">Ranking</a>
+        <a href="{{ '/cases/' | relative_url }}" class="{% if here contains '/cases/' %}active{% endif %}">Casos</a>
+        <a href="{{ '/proponer/' | relative_url }}" class="{% if here contains '/proponer/' %}active{% endif %}">Proponer</a>
       </nav>
     </div>
   </header>
 
-  <main class="wrap">
+  <main class="wrap" id="main" role="main">
     {{ content }}
   </main>
+
+  <footer class="footer" role="contentinfo">
+    © {{ site.time | date: "%Y" }} StepsToSucces.com — Building a better future, together.
+  </footer>
+
+  <!-- Opt-in para scripts por página -->
+  {% if page.scripts %}
+    {{ page.scripts }}
+  {% endif %}
+
+  <!-- Preferencias de usuario: reduce motion -->
+  <script>
+    (function(){
+      try {
+        if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          document.documentElement.classList.add('reduce-motion');
+        }
+      } catch(e){}
+    })();
+  </script>
+</body>
+</html>
 
   <footer class="footer">
     © {{ site.time | date: "%Y" }} StepsToSucces.com — Building a better future, together.
