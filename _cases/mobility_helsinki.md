@@ -2,24 +2,39 @@
 layout: case
 title: "Helsinki, pionera de la Movilidad como Servicio (MaaS)"
 pais: "Finlandia"
-sector: ["Movilidad", "Transporte", "Tecnologia"]
+ciudad_region: "Helsinki"
+sector: ["Movilidad","Transporte","Tecnologia"]
+
 anio_inicio: 2014
+anio_fin: 2025
 score: 9
+
+problema: "Dependencia del auto y fricción entre modos."
+intervencion: "Ecosistema MaaS con la app Whim integrando transporte público, taxi y micromovilidad bajo suscripción."
+costo_aprox: "ND"
+
 kpis:
   - "% adopcion usuarios"
   - "% reduccion de uso del automovil"
   - "CO2 evitado"
   - "Usuarios activos Whim"
+
 resultados:
   - "Más de 2 millones de viajes en 2018 a través de Whim"
   - "6% de la población metropolitana usando MaaS en 2018"
   - "25% más uso de transporte público en pilotos"
   - "Reducción del uso del auto privado (1 de cada 10 usuarios dejó su coche)"
+
+replicabilidad: "Media-Alta si hay integración tarifaria, datos abiertos y regulador activo."
+fuentes:
+  - "https://en.wikipedia.org/wiki/Mobility_as_a_service"
+
 lat: 60.1699
 lng: 24.9384
 curador: "Jorge Emilio Tamez Macias"
 permalink: /cases/helsinki-maas/
 ---
+
 
 
 ## Contexto urbano, político y tecnológico del surgimiento de MaaS en Helsinki
