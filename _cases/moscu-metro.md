@@ -1,39 +1,25 @@
 ---
-layout: default
+layout: case
 title: "El Metro de Moscú: historia, diseño e impacto social (1930–2025)"
 pais: "Rusia"
 flag: "🇷🇺"
 ciudad: "Moscú"
 lat: 55.7558
 lng: 37.6173
-
-# Para ranking/filtrado
-anio: 1935
-año_inicio: 1935
-año_fin: 2025
-
+anio_inicio: 1935      # (mantén también año_inicio si ya lo usaste en otros)
+anio_fin: 2025
 sector:
   - "Transporte"
   - "Infraestructura cultural"
   - "Planeación urbana"
-
 score: 86
-
 kpis:
   - "Frecuencia pico: 90–100 s"
   - "Cobertura: >90% población a distancia caminable"
   - "Estaciones: >300 (≈14 líneas)"
   - "Longitud: >500 km"
-
-resumen: "Red subterránea emblemática de Moscú que combina transporte masivo, patrimonio arquitectónico y alta eficiencia operativa; expandida agresivamente desde 2010 con anillos y diametrales."
-
-tags:
-  - "metro"
-  - "movilidad"
-  - "patrimonio"
-  - "URSS"
-  - "modernización"
-
+resumen: "Red subterránea emblemática de Moscú…"
+tags: ["metro","movilidad","patrimonio","URSS","modernización"]
 permalink: /cases/moscu-metro/
 ---
 
