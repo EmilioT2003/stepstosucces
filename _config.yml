@@ -1,25 +1,117 @@
-title: StepsToSucces
+# =========================
+# Site identity
+# =========================
+title: "StepsToSucces"
 description: "Top public-policy ideas & case studies. (ES/EN)"
+lang: es
+timezone: America/Cancun
 
-# 🔹 No usamos remote_theme porque queremos nuestro layout propio
+# Dominio / rutas
+url: "https://www.stepstosucces.com"
+baseurl: ""          # con CNAME, déjalo vacío
+permalink: pretty    # URLs limpias con / al final
+
+# =========================
+# Theme (layout propio)
+# =========================
 theme: null
 
-# Colecciones
+# =========================
+# Collections
+# =========================
 collections:
   cases:
     output: true
     permalink: /cases/:name/
 
-# Plugins útiles
+# Defaults (seguridad y consistencia de datos)
+defaults:
+  # Páginas normales
+  - scope: { path: "" }
+    values:
+      layout: default
+      lang: es
+  # Casos
+  - scope: { path: "", type: cases }
+    values:
+      layout: case
+      lang: es
+      use_leaflet: true     # los casos suelen mostrar mapa
+      score:                # si falta, no rompe ranking
+      anio_inicio:
+      anio_fin:
+
+# =========================
+# Markdown / Rendering
+# =========================
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  input: GFM
+  hard_wrap: false
+  syntax_highlighter_opts:
+    line_numbers: false
+
+# =========================
+# Plugins (whitelist GitHub Pages)
+# =========================
 plugins:
   - jekyll-seo-tag
   - jekyll-sitemap
+  - jekyll-feed        # opcional: feed RSS del sitio
 
-# URL y dominio
-url: "https://www.stepstosucces.com"
-baseurl: ""   # déjalo vacío porque usas dominio con CNAME
+# Config SEO opcional (usado por jekyll-seo-tag)
+# Ajusta cuando tengas logos/redes.
+logo: /assets/brand/logo.png
+social:
+  name: StepsToSucces
+  links:
+    - https://github.com/EmilioT2003/stepstosucces
 
-# Enlaces rápidos opcionales en top-right (si los usas en layout)
+# =========================
+# Build / Performance / Calidad
+# =========================
+future: false
+strict_front_matter: false
+incremental: false
+lsi: false
+
+# Excluir basura de build
+exclude:
+  - node_modules/
+  - vendor/
+  - README.md
+  - LICENSE
+  - package.json
+  - package-lock.json
+  - yarn.lock
+  - .gitignore
+  - .gitattributes
+  - Gemfile
+  - Gemfile.lock
+  - scripts/
+  - draft/
+  - "*.sketch"
+  - "*.fig"
+
+# Incluir archivos necesarios que no se copian por defecto
+include:
+  - CNAME
+
+# =========================
+# Sitemap / Feed
+# =========================
+sitemap:
+  exclude:
+    - /draft/
+    - /assets/
+  filename: sitemap.xml
+feed:
+  path: feed.xml
+
+# =========================
+# Enlaces rápidos (navbar, si los usas)
+# =========================
 aux_links:
   "GitHub":
     - "https://github.com/EmilioT2003/stepstosucces"
