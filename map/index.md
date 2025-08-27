@@ -80,10 +80,17 @@ document.addEventListener('DOMContentLoaded', function () {
   $ymin.placeholder = String(minY);
   $ymax.placeholder = String(maxY);
 
-  // Mapa
-  const map = L.map('map', { worldCopyJump: true, scrollWheelZoom: false });
-  const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap' });
-  tiles.addTo(map);
+// Mapa
+const map = L.map('map', { worldCopyJump: true, scrollWheelZoom: false });
+
+L.tileLayer(
+  'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', 
+  {
+    attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ',
+    maxZoom: 16
+  }
+).addTo(map);
+
 
   // Cluster layer
   const clusters = L.markerClusterGroup({ showCoverageOnHover: false, maxClusterRadius: 50 });
