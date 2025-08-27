@@ -3,7 +3,18 @@ layout: case
 title: "Presupuesto Participativo de Porto Alegre (1989–2025)"
 pais: "Brasil"
 ciudad_region: "Porto Alegre (RS)"
-sector: ["Gobernanza", "Participación ciudadana", "Finanzas públicas"]
+---
+layout: case
+title: "Presupuesto Participativo de Porto Alegre (1989–2025)"
+pais: "Brasil"
+ciudad_region: "Porto Alegre (RS)"
+sector: ["Gobernanza","Participación ciudadana"]
+año_inicio: 1989
+resultados: ["Cobertura de agua 75%→98%", "Alcantarillado 46%→85%"]
+lat: -30.0346
+lng: -51.2177
+---
+
 problema: "Desigualdad urbana, clientelismo y falta de participación ciudadana en la asignación presupuestaria."
 intervencion: "Proceso anual de Presupuesto Participativo (OP) con asambleas barriales, delegados y criterios transparentes de inversión."
 costo_aprox: "ND"
