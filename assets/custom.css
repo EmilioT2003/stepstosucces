@@ -18,3 +18,11 @@ table { width:100%; }
 
 /* Logo opcional: reducir */
 .site-logo img { height: 28px !important; }
+/* Home mini-map */
+#home-map { height: 340px; border-radius:12px; border:1px solid #e5e7eb; overflow:hidden; }
+#home-map .leaflet-control-zoom a { border-radius:8px; }
+#home-map.gmono .leaflet-tile { filter: grayscale(100%) contrast(1.05) brightness(1.06); }
+
+/* Pin SVG */
+.pin { transform: translate(-12px,-24px); } /* ancla */
+.pin svg { width:24px; height:24px; }
