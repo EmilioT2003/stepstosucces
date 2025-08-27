@@ -3,18 +3,8 @@ layout: case
 title: "Presupuesto Participativo de Porto Alegre (1989–2025)"
 pais: "Brasil"
 ciudad_region: "Porto Alegre (RS)"
----
-layout: case
-title: "Presupuesto Participativo de Porto Alegre (1989–2025)"
-pais: "Brasil"
-ciudad_region: "Porto Alegre (RS)"
 sector: ["Gobernanza","Participación ciudadana"]
 año_inicio: 1989
-resultados: ["Cobertura de agua 75%→98%", "Alcantarillado 46%→85%"]
-lat: -30.0346
-lng: -51.2177
----
-
 problema: "Desigualdad urbana, clientelismo y falta de participación ciudadana en la asignación presupuestaria."
 intervencion: "Proceso anual de Presupuesto Participativo (OP) con asambleas barriales, delegados y criterios transparentes de inversión."
 costo_aprox: "ND"
@@ -23,7 +13,6 @@ resultados:
   - "Cobertura de alcantarillado: 46% (1989) → 85% (1996)"
   - "Participación anual de hasta 40,000 ciudadanos (1999)"
 kpis: ["Cobertura de agua", "Cobertura de alcantarillado", "Participación ciudadana", "Inversión per cápita en barrios periféricos"]
-año_inicio: 1989
 replicabilidad: "Alta si existe voluntad política, reglas claras y recursos asignados."
 fuentes:
   - "https://www.lincolninst.edu/es/publications/articles/presupuesto-participativo-politicas-poderes-en-porto-alegre/"
@@ -31,6 +20,8 @@ fuentes:
   - "https://en.wikipedia.org/wiki/Participatory_budgeting"
 curador: "Emilio"
 lat: -30.0346
+lng: -51.2177
+---
 # Introducción
 El Presupuesto Participativo de Porto Alegre (Orçamento Participativo, OP) es un proceso pionero...
 (blablabla — pegas TODO tu texto aquí tal cual, con subtítulos `## Contexto`, `## Resultados`, etc.)
