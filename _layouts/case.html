@@ -1,0 +1,39 @@
+---
+---
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ page.title }} · {{ site.title }}</title>
+  <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+<body class="container">
+  <a href="{{ '/' | relative_url }}">← Volver</a>
+  <h1>{{ page.title }}</h1>
+  <p><strong>País:</strong> {{ page.pais }} ·
+     <strong>Sector:</strong> {{ page.sector | join: ', ' }} ·
+     <strong>Año inicio:</strong> {{ page.anio_inicio }}</p>
+
+  <h2>KPIs</h2>
+  <ul>
+    {% for k in page.kpis %}<li>{{ k }}</li>{% endfor %}
+  </ul>
+
+  <h2>Resultados</h2>
+  <ul>
+    {% for r in page.resultados %}<li>{{ r }}</li>{% endfor %}
+  </ul>
+
+  <div id="map" style="height:320px;border-radius:12px;margin-top:12px;"></div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function(){
+      const map = L.map('map',{scrollWheelZoom:false}).setView([{{ page.lat }}, {{ page.lng }}], 11);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap'}).addTo(map);
+      L.marker([{{ page.lat }}, {{ page.lng }}]).addTo(map).bindPopup({text: "{{ page.title }}"});
+    });
+  </script>
+</body>
+</html>
