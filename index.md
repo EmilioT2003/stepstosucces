@@ -14,18 +14,22 @@ Explora iniciativas impactantes del mundo y descubre pasos al éxito en polític
   <section class="card">
     <h2>Ranking</h2>
     <div class="rank">
-      <div class="rank-item">
-        <div>🥇 <strong>Denmark</strong><div class="muted">Renewable Energy Program</div></div>
-        <div class="muted">↑ 20%</div>
-      </div>
-      <div class="rank-item">
-        <div>🥈 <strong>Estonia</strong><div class="muted">Digital Government Services</div></div>
-        <div class="pill">83.1</div>
-      </div>
-      <div class="rank-item">
-        <div>🥉 <strong>Italy</strong><div class="muted">Universal Basic Income</div></div>
-        <div class="pill">83.1</div>
-      </div>
+    {% assign top = site.cases | where_exp:"c","c.score != nil" | sort:"score" | reverse %}
+    {% for c in top limit:5 %}
+      <a class="rank-item" href="{{ c.url | relative_url }}">
+        <div class="rank-left">
+          <span class="medal">
+            {% case forloop.index %}
+              {% when 1 %}🥇{% when 2 %}🥈{% when 3 %}🥉{% else %}{{ forloop.index }}{% endcase %}
+          </span>
+          <div>
+            <div class="country">{{ c.pais }}{% if c.flag %} {{ c.flag }}{% endif %}</div>
+            <div class="small">{{ c.title }}</div>
+          </div>
+        </div>
+        <span class="pill">{{ c.score }}</span>
+      </a>
+    {% endfor %}
     </div>
   </section>
 </div>
