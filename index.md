@@ -11,7 +11,8 @@ nav_order: 1
 - 🗺️ Explora el **[Mapa](/map/)**.
 - 🏆 Revisa el **[Ranking](/ranking/)**.
 - 📚 Todos los **[Casos](/cases/)**.
-- ✍️ ¿Tienes un caso? **[Propón uno](https://github.com/TU_USUARIO/stepstosucces/issues/new?assignees=&labels=caso&projects=&template=caso.yml&title=Propuesta+de+caso)**.
+- ✍️ ¿Tienes un caso? **[Propón uno](https://github.com/EmilioT2003/stepstosucces/issues/new?template=caso.yml&title=Propuesta+de+caso:+[Título])**.
+
 
 ---
 
