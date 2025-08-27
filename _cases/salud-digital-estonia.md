@@ -7,7 +7,7 @@ sector: ["Salud","Gobierno digital"]
 
 anio_inicio: 2005
 anio_fin: 2025
-score: 0
+score: 60
 
 problema: "Fragmentacion clínica y duplicación de pruebas."
 intervencion: "Sistema nacional EHIS con X-Road, recetas electrónicas, imágenes digitales y portal del paciente."
@@ -31,7 +31,7 @@ fuentes:
 
 lat: 59.4370
 lng: 24.7536
-curador: "Emilio"
+curador: "Jorge Emilio Tamez Macias"
 permalink: /cases/estonia-ehealth/
 ---
 
