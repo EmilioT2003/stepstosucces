@@ -3,26 +3,36 @@ layout: case
 title: "Sistema de Salud Digital de Estonia (e-Health)"
 pais: "Estonia"
 ciudad_region: "Tallin (nacional)"
-sector: ["Salud", "Gobierno digital"]
-año_inicio: 2005
-problema: "Fragmentación de información clínica, duplicación de pruebas y falta de continuidad asistencial."
-intervencion: "Implementación nacional de un sistema de salud electrónica integrado (EHIS) con interoperabilidad vía X-Road, recetas electrónicas, imágenes digitales y portal del paciente."
-costo_aprox: "1,6 millones € (fase inicial 2005–2008, cofinanciados 75% UE, 25% gobierno estonio)."
+sector: ["Salud","Gobierno digital"]
+
+anio_inicio: 2005
+anio_fin: 2025
+score: 0
+
+problema: "Fragmentacion clínica y duplicación de pruebas."
+intervencion: "Sistema nacional EHIS con X-Road, recetas electrónicas, imágenes digitales y portal del paciente."
+costo_aprox: "1.6 millones € (fase 2005–2008, 75% UE, 25% gobierno)."
+
+kpis:
+  - "Cobertura de digitalizacion clinica"
+  - "Uso de receta electronica"
+  - "Accesos ciudadanos al portal"
+  - "Interoperabilidad de proveedores"
+
 resultados:
-  - "99% de recetas electrónicas en 2010."
-  - "166 millones de documentos clínicos en 2024 (~125 por habitante)."
-  - "Cobertura universal de historias clínicas electrónicas."
-kpis: ["Cobertura de digitalización clínica", "Uso de receta electrónica", "Accesos ciudadanos al portal", "Interoperabilidad de proveedores"]
-replicabilidad: "Alta si existe infraestructura digital nacional (identidad única, interoperabilidad), marco legal sólido y confianza ciudadana."
+  - "99% de recetas electrónicas en 2010"
+  - "166 millones de documentos clínicos en 2024 (~125 por habitante)"
+  - "Cobertura universal de HCE"
+
+replicabilidad: "Alta con identidad digital única, interoperabilidad y marco legal."
 fuentes:
-  - "https://en.wikipedia.org/wiki/Healthcare_in_Estonia"
   - "https://integratedcare4people.org/practices/789/estonia-national-e-health-system"
-  - "https://saludenlinea.press"
-  - "https://prosaludchile.cl"
   - "https://investinestonia.com"
-curador: "Emilio"
+
 lat: 59.4370
 lng: 24.7536
+curador: "Emilio"
+permalink: /cases/estonia-ehealth/
 ---
 
 # Introducción
