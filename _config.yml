@@ -16,3 +16,8 @@ plugins:
   - jekyll-sitemap
 
 url: "https://www.stepstosucces.com"
+logo: /assets/logo.svg
+# Enlaces rápidos opcionales en top-right
+aux_links:
+  "GitHub":
+    - "https://github.com/EmilioT2003/stepstosucces"
