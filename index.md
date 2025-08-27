@@ -1,92 +1,56 @@
 ---
-layout: home
-title: StepsToSucces
-permalink: /
----
----
 layout: default
-title: StepsToSucces
-nav_order: 1
+title: "Global Repository of Public Policy Success Stories"
 ---
 
-# 🌍 StepsToSucces
-**Mejores prácticas y casos de éxito gubernamentales.**  
-Datos, replicabilidad e impacto global.
+# Global Repository of Public Policy Success Stories
+Explora iniciativas impactantes del mundo y descubre pasos al éxito en política pública.
 
-<div class="hero">
-  <p>
-    🔎 Usa la búsqueda para encontrar casos por país, sector o KPI.  
-    🗺️ Explora el Mapa interactivo.  
-    🏆 Revisa el Ranking.  
-    ✍️ ¿Tienes un caso? <a href="/propose/">Propón uno</a>.
-  </p>
+<div class="grid">
+  <section class="card">
+    <div id="home-map" class="map"></div>
+  </section>
+
+  <section class="card">
+    <h2>Ranking</h2>
+    <div class="rank">
+      <div class="rank-item">
+        <div>🥇 <strong>Denmark</strong><div class="muted">Renewable Energy Program</div></div>
+        <div class="muted">↑ 20%</div>
+      </div>
+      <div class="rank-item">
+        <div>🥈 <strong>Estonia</strong><div class="muted">Digital Government Services</div></div>
+        <div class="pill">83.1</div>
+      </div>
+      <div class="rank-item">
+        <div>🥉 <strong>Italy</strong><div class="muted">Universal Basic Income</div></div>
+        <div class="pill">83.1</div>
+      </div>
+    </div>
+  </section>
 </div>
 
----
-
-## 🗺️ Mapa de Casos
-<div id="home-map"></div>
-
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+## Casos
+<ul class="cases-list">
+{% for c in site.cases %}
+  <li class="case-item">
+    <a href="{{ c.url | relative_url }}">
+      <span class="flag">{{ c.flag }}</span>
+      <span class="title">{{ c.title }}</span>
+      <span class="muted">{{ c.pais }} — {{ c.anio_inicio | default: c['año_inicio'] }}</span>
+    </a>
+  </li>
+{% endfor %}
+</ul>
 
 <script>
-const CASES = [
-{% for c in site.cases %}
-{
-  title: {{ c.title | jsonify }},
-  url: "{{ c.url }}",
-  pais: {{ c.pais | jsonify }},
-  lat: {{ c.lat | default: 'null' }},
-  lng: {{ c.lng | default: 'null' }}
-},
-{% endfor %}
-];
+document.addEventListener('DOMContentLoaded', function(){
+  const m = L.map('home-map',{scrollWheelZoom:false}).setView([20,0], 2);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap'}).addTo(m);
+  {% for c in site.cases %}
+    {% if c.lat and c.lng %}
+      L.marker([{{ c.lat }}, {{ c.lng }}]).addTo(m).bindPopup("{{ c.title | escape }}");
+    {% endif %}
+  {% endfor %}
+});
 </script>
-
-// ===== Mini-mapa estilo profesional =====
-(function initMap(){
-  const el = document.getElementById('home-map');
-  if (!el) return;
-
-  const map = L.map(el, { zoomControl:true, scrollWheelZoom:false })
-               .setView([20,0], 2);
-
-  // Tiles claros tipo Carto "Positron"
-  L.tileLayer(
-    'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
-    { attribution: '&copy; OpenStreetMap &copy; CARTO', subdomains:'abcd', maxZoom:19 }
-  ).addTo(map);
-
-  // Pin SVG (azul sobrio)
-  const pin = L.divIcon({
-    className: 'pin',
-    html: `<svg viewBox="0 0 24 24" fill="#1f6feb" xmlns="http://www.w3.org/2000/svg">
-             <path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/>
-           </svg>`,
-    iconSize: [24,24],
-    iconAnchor: [12,24]
-  });
-
-  // Datos de casos (asegúrate que CASES esté definido en _data/cases.json)
-  const pts = [];
-  if (typeof CASES !== "undefined") {
-    CASES.filter(c => c.lat && c.lng).forEach(c => {
-      L.marker([c.lat, c.lng], {icon: pin})
-        .addTo(map)
-        .bindPopup(`<a href="${c.url}"><strong>${c.title}</strong></a><br><span class="sub">${c.pais||''}</span>`);
-      pts.push([c.lat, c.lng]);
-    });
-    if (pts.length) map.fitBounds(pts, { padding:[20,20] });
-  }
-})();
-</script>
-
----
-
-## 📚 Explora
-- 👉 [Todos los Casos](/cases/)
-- 👉 [Mapa Completo](/map/)
-- 👉 [Ranking de Impacto](/ranking/)
-- 👉 [Propón un Caso](/propose/)
-
