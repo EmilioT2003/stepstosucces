@@ -7,7 +7,7 @@ sector: ["Movilidad","Transporte","Tecnologia"]
 
 anio_inicio: 2014
 anio_fin: 2025
-score: 9
+score: 74
 
 problema: "Dependencia del auto y fricción entre modos."
 intervencion: "Ecosistema MaaS con la app Whim integrando transporte público, taxi y micromovilidad bajo suscripción."
