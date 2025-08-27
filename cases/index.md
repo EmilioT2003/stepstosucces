@@ -1,8 +1,8 @@
 ---
-title: Casos
 layout: default
-nav_order: 2
+title: "Global Repository of Public Policy Success Stories"
 ---
+
 
 # Casos
 
