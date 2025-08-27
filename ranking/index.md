@@ -36,7 +36,6 @@ permalink: /ranking/
 </table>
 
 <script>
-// --- Datos desde la colección ---
 const RAW = [
 {% for c in site.cases %}
 {
@@ -52,7 +51,6 @@ const RAW = [
 {% endfor %}
 ];
 
-// --- Puntuación ---
 function computeScore(c) {
   if (typeof c.score === 'number') return c.score;
   const k = Array.isArray(c.kpis) ? c.kpis.length : 0;
@@ -60,7 +58,6 @@ function computeScore(c) {
   return k*2 + r;
 }
 
-// --- Render ---
 const tbody = document.querySelector('#tbl tbody');
 const q = document.getElementById('q');
 const country = document.getElementById('country');
@@ -99,5 +96,8 @@ function render() {
 }
 
 [q, country, sector].forEach(el => el.addEventListener('input', render));
+
+
+  
 render();
 </script>
