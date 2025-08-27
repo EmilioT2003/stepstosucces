@@ -1,4 +1,3 @@
-
 title: StepsToSucces
 description: Top public-policy ideas & case studies. (ES/EN)
 remote_theme: just-the-docs/just-the-docs
@@ -17,7 +16,12 @@ plugins:
 
 url: "https://www.stepstosucces.com"
 logo: /assets/logo.svg
+
 # Enlaces rápidos opcionales en top-right
 aux_links:
   "GitHub":
     - "https://github.com/EmilioT2003/stepstosucces"
+
+# Activar CSS personalizado
+just_the_docs:
+  custom_css: assets/css/custom.css
