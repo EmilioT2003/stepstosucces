@@ -128,13 +128,20 @@
     </section>
     {% endif %}
 
-    {% if page.resultados %}
+        {% if page.resultados %}
     <section class="card" aria-labelledby="resultados-titulo">
       <h2 id="resultados-titulo">Resultados</h2>
       <ul class="bullets">
         {% for r in page.resultados %}<li>{{ r }}</li>{% endfor %}
       </ul>
     </section>
+    {% endif %}
+
+    <!-- 🔹 Aquí añadimos el cuerpo largo del caso -->
+    {% if content and content != "" %}
+    <article class="card prose">
+      {{ content }}
+    </article>
     {% endif %}
 
     <section class="card" aria-labelledby="mapa-titulo">
