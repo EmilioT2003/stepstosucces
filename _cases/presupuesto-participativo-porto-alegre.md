@@ -3,25 +3,39 @@ layout: case
 title: "Presupuesto Participativo de Porto Alegre (1989–2025)"
 pais: "Brasil"
 ciudad_region: "Porto Alegre (RS)"
-sector: ["Gobernanza","Participación ciudadana"]
-año_inicio: 1989
-problema: "Desigualdad urbana, clientelismo y falta de participación ciudadana en la asignación presupuestaria."
-intervencion: "Proceso anual de Presupuesto Participativo (OP) con asambleas barriales, delegados y criterios transparentes de inversión."
+sector: ["Gobernanza","Participacion ciudadana"]
+
+anio_inicio: 1989
+anio_fin: 2025
+score: 0
+
+problema: "Desigualdad urbana, clientelismo y baja participacion en el gasto."
+intervencion: "Proceso anual de Presupuesto Participativo con asambleas barriales, delegados y criterios de inversión transparentes."
 costo_aprox: "ND"
+
+kpis:
+  - "Cobertura de agua"
+  - "Cobertura de alcantarillado"
+  - "Participacion ciudadana"
+  - "Inversion per capita en barrios perifericos"
+
 resultados:
-  - "Cobertura de agua potable: 75% (1988) → 98% (1997)"
+  - "Cobertura de agua: 75% (1988) → 98% (1997)"
   - "Cobertura de alcantarillado: 46% (1989) → 85% (1996)"
-  - "Participación anual de hasta 40,000 ciudadanos (1999)"
-kpis: ["Cobertura de agua", "Cobertura de alcantarillado", "Participación ciudadana", "Inversión per cápita en barrios periféricos"]
-replicabilidad: "Alta si existe voluntad política, reglas claras y recursos asignados."
+  - "Hasta 40,000 participantes/año (1999)"
+
+replicabilidad: "Alta con voluntad política, reglas claras y presupuesto."
 fuentes:
   - "https://www.lincolninst.edu/es/publications/articles/presupuesto-participativo-politicas-poderes-en-porto-alegre/"
   - "https://oidp.net/"
   - "https://en.wikipedia.org/wiki/Participatory_budgeting"
-curador: "Emilio"
+
 lat: -30.0346
 lng: -51.2177
+curador: "Emilio"
+permalink: /cases/porto-alegre-op/
 ---
+
 # Introducción
 
 El Presupuesto Participativo de Porto Alegre nace en un momento histórico marcado por la transición democrática de Brasil y por condiciones locales de aguda desigualdad socioeconómica. Tras el fin de la dictadura militar (1964-1985), Brasil vivía un proceso de redemocratización y descentralización. En 1988 se promulgó una nueva Constitución que fortaleció la autonomía municipal y abrió espacios para la participación ciudadana. Sin embargo, décadas de autoritarismo habían dejado una herencia de desconfianza generalizada hacia la clase política y las instituciones públicas
