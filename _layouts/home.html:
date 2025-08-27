@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ site.title }}</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <link rel="stylesheet" href="/assets/css/custom.css">
+</head>
+<body>
+
+<header class="hero">
+  <h1>🌍 Global Repository of Public Policy Success Stories</h1>
+  <p>Explore impactful initiatives from around the world and discover steps to success in public policy.</p>
+  <nav>
+    <a href="/map/">Mapa</a>
+    <a href="/ranking/">Ranking</a>
+    <a href="/cases/">Casos</a>
+    <a href="/propose/">Proponer</a>
+  </nav>
+</header>
+
+<main class="grid">
+  <section class="mapa">
+    <div id="home-map" style="height:300px;"></div>
+  </section>
+
+  <section class="ranking">
+    <h2>Ranking</h2>
+    <ul>
+      {% assign sorted = site.cases | sort: "score" | reverse %}
+      {% for c in sorted limit:5 %}
+        <li>
+          <strong>{{ forloop.index }}. {{ c.pais }}</strong> — {{ c.title }} ({{ c.score }})
+        </li>
+      {% endfor %}
+    </ul>
+  </section>
+
+  <section class="casos">
+    <h2>Casos</h2>
+    {% for c in site.cases limit:5 %}
+      <div class="case-card">
+        <span class="flag">{{ c.flag }}</span>
+        <a href="{{ c.url }}"><strong>{{ c.pais }}</strong> — {{ c.title }}</a>
+        <small>{{ c.año_inicio }}</small>
+      </div>
+    {% endfor %}
+  </section>
+</main>
+
+<footer>
+  <p>© 2024 StepsToSucces.com — Building a better future, together.</p>
+</footer>
+
+<script>
+const CASES = [
+{% for c in site.cases %}
+  {title: {{ c.title | jsonify }}, url:"{{ c.url }}", lat:{{ c.lat|default:"null" }}, lng:{{ c.lng|default:"null"}}},
+{% endfor %}
+];
+(function initMap(){
+  const el=document.getElementById('home-map');
+  const map=L.map(el).setView([20,0],2);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+  CASES.filter(c=>c.lat && c.lng).forEach(c=>{
+    L.marker([c.lat,c.lng]).addTo(map).bindPopup(`<a href="${c.url}">${c.title}</a>`);
+  });
+})();
+</script>
+
+</body>
+</html>
