@@ -52,9 +52,7 @@ const RAW = [
 {% endfor %}
 ];
 
-// --- Regla de puntuación (simple y transparente) ---
-// 1) Si el caso trae 'score', úsalo.
-// 2) Si no, score = (#KPIs * 2) + (#resultados)
+// --- Puntuación ---
 function computeScore(c) {
   if (typeof c.score === 'number') return c.score;
   const k = Array.isArray(c.kpis) ? c.kpis.length : 0;
@@ -75,7 +73,6 @@ function render() {
 
   let rows = RAW.map(c => ({...c, score: computeScore(c)}));
 
-  // filtros
   rows = rows.filter(c => {
     const text = [c.title, c.pais, (c.sector||[]).join(' ')].join(' ').toLowerCase();
     const okQ = query ? text.includes(query) : true;
@@ -84,10 +81,8 @@ function render() {
     return okQ && okC && okS;
   });
 
-  // orden desc por score, luego por año desc
   rows.sort((a,b) => (b.score - a.score) || ((b.anio||0)-(a.anio||0)));
 
-  // pintar
   tbody.innerHTML = rows.map((c, i) => {
     const medal = i===0 ? '🥇' : i===1 ? '🥈' : i===2 ? '🥉' : (i+1);
     const sectorTxt = (c.sector||[]).join(', ');
@@ -105,6 +100,4 @@ function render() {
 
 [q, country, sector].forEach(el => el.addEventListener('input', render));
 render();
-</script>
-${c.score}</li>`).join('') + '</ol>';
 </script>
