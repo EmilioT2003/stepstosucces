@@ -75,6 +75,43 @@ a { color:var(--brand); }
   background:#fff; border:1px solid var(--line); border-radius:12px;
   padding:.9rem; box-shadow:0 1px 0 rgba(0,0,0,.03);
 }
+/* ===== Ranking ===== */
+.rk-toolbar {
+  display:flex; gap:.6rem; flex-wrap:wrap; margin:.6rem 0 1rem;
+}
+.rk-toolbar input, .rk-toolbar select {
+  padding:.6rem .7rem; border:1px solid var(--line); border-radius:8px; min-width:230px;
+}
+
+.rk-grid { display:grid; grid-template-columns:1fr; gap:.7rem; }
+@media (min-width: 900px){
+  .rk-grid { grid-template-columns:1fr 1fr; }
+}
+
+.rk-card {
+  display:flex; align-items:center; justify-content:space-between; gap:.8rem;
+  background:#fff; border:1px solid var(--line); border-radius:12px; padding:.9rem;
+  box-shadow:0 1px 0 rgba(0,0,0,.03);
+}
+.rk-left { display:flex; align-items:center; gap:.8rem; min-width:0; }
+.rk-info h3 { margin:.05rem 0 .25rem; font-size:1.05rem; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:44vw; }
+@media (max-width: 900px){ .rk-info h3 { max-width:66vw; } }
+.rk-meta { display:flex; gap:.35rem; align-items:center; flex-wrap:wrap; color:var(--muted); }
+
+.medal {
+  width:32px; height:32px; border-radius:999px; display:grid; place-items:center;
+  background:#f3f4f6; font-weight:700; color:#111; border:1px solid var(--line);
+}
+.medal.gold { background:#fde68a; }
+.medal.silver { background:#e5e7eb; }
+.medal.bronze { background:#fcd34d; }
+
+.rk-score { text-align:right; }
+.rk-score-num { font-size:1.6rem; font-weight:800; line-height:1; }
+.rk-score-label { font-size:.8rem; color:var(--muted); }
+
+.pill { background:var(--pill); color:#374151; border-radius:999px; padding:.15rem .5rem; font-size:.8rem; }
+
 .card + .card { margin-top:.6rem; }
 
 /* ===== Utilidades ===== */
