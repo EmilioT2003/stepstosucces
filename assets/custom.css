@@ -1,53 +1,251 @@
-:root{--txt:#111;--muted:#6b7280;--bg:#fff;--card:#f8fafc;--border:#e5e7eb}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--txt);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.55}
-.wrap{max-width:1100px;margin:0 auto;padding:24px}
-.topbar{border-bottom:1px solid var(--border);background:#fff}
-.topbar .wrap{display:flex;align-items:center;justify-content:space-between}
-.brand{font-weight:700;text-decoration:none;color:var(--txt)}
-.nav a{margin-left:12px;padding:6px 10px;border:1px solid var(--border);border-radius:10px;text-decoration:none;color:var(--txt)}
-.hero{font-family:"Playfair Display",serif;font-size:38px;line-height:1.1;margin:12px 0 8px}
-.grid{display:grid;gap:24px;grid-template-columns:1.4fr .9fr}
-.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px}
-.meta{display:grid;gap:8px}
-.map{height:340px;border-radius:12px;overflow:hidden}
-.rank{display:flex;flex-direction:column;gap:12px}
-.rank-item{display:flex;justify-content:space-between;align-items:center;background:#fff;border:1px solid var(--border);border-radius:12px;padding:12px}
-.pill{font-size:12px;border-radius:999px;border:1px solid var(--border);padding:2px 10px}
-.muted{color:var(--muted);font-size:14px}
-.cases-list{list-style:none;margin:0;padding:0;display:grid;gap:10px}
-.case-item a{display:flex;gap:10px;align-items:center;justify-content:space-between;text-decoration:none;color:var(--txt);background:#fff;border:1px solid var(--border);border-radius:12px;padding:10px 12px}
+/* =========================================================
+   Variables globales
+   ========================================================= */
+:root{
+  --txt:#111;
+  --muted:#6b7280;
+  --bg:#fff;
+  --card:#f8fafc;
+  --border:#e5e7eb;
+
+  --accent:#2563eb;
+  --accent-hover:#1d4ed8;
+
+  --radius:16px;
+  --radius-sm:10px;
+  --shadow-sm:0 1px 3px rgba(0,0,0,0.08);
+  --shadow-md:0 3px 6px rgba(0,0,0,0.12);
+  --shadow-lg:0 8px 20px rgba(0,0,0,0.16);
+}
+
+/* =========================================================
+   Reset básico
+   ========================================================= */
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--txt);
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  line-height:1.55;
+  font-size:16px;
+}
+
+/* =========================================================
+   Layout wrappers
+   ========================================================= */
+.wrap{
+  max-width:1100px;
+  margin:0 auto;
+  padding:24px;
+}
+.grid{
+  display:grid;
+  gap:24px;
+  grid-template-columns:1.4fr .9fr;
+}
+@media(max-width:900px){
+  .grid{grid-template-columns:1fr}
+}
+
+/* =========================================================
+   Topbar
+   ========================================================= */
+.topbar{
+  border-bottom:1px solid var(--border);
+  background:#fff;
+  position:sticky;top:0;z-index:100;
+}
+.topbar .wrap{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.brand{
+  font-weight:700;
+  text-decoration:none;
+  color:var(--txt);
+  font-size:20px;
+}
+.nav a{
+  margin-left:12px;
+  padding:6px 12px;
+  border:1px solid var(--border);
+  border-radius:var(--radius-sm);
+  text-decoration:none;
+  color:var(--txt);
+  font-size:14px;
+  transition:all .2s ease;
+}
+.nav a:hover,
+.nav a.active{
+  background:var(--accent);
+  border-color:var(--accent);
+  color:#fff;
+}
+
+/* =========================================================
+   Hero / Headings
+   ========================================================= */
+.hero{
+  font-family:"Playfair Display",serif;
+  font-size:38px;
+  line-height:1.1;
+  margin:16px 0 12px;
+}
+@media(max-width:900px){
+  .hero{font-size:30px}
+}
+h2{font-size:22px;margin-bottom:12px;font-weight:600}
+
+/* =========================================================
+   Cards / Containers
+   ========================================================= */
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:16px;
+  box-shadow:var(--shadow-sm);
+}
+.card:hover{box-shadow:var(--shadow-md)}
+
+/* =========================================================
+   Lists / Rank / Cases
+   ========================================================= */
+.rank{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+.rank-item{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:12px;
+  transition:transform .15s ease, box-shadow .15s ease;
+}
+.rank-item:hover{
+  transform:translateY(-2px);
+  box-shadow:var(--shadow-md);
+}
+.rank-item .medal{font-size:18px}
+.pill{
+  font-size:12px;
+  border-radius:999px;
+  border:1px solid var(--border);
+  padding:2px 10px;
+  background:#fff;
+}
+
+/* Casos */
+.cases-list{
+  list-style:none;
+  display:grid;
+  gap:10px;
+}
+.case-item a{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  justify-content:space-between;
+  text-decoration:none;
+  color:var(--txt);
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:10px 12px;
+  transition:transform .15s ease, box-shadow .15s ease;
+}
+.case-item a:hover{
+  transform:translateY(-2px);
+  box-shadow:var(--shadow-md);
+}
 .case-item .title{font-weight:600}
 .case-item .flag{font-size:18px}
-.back{display:inline-block;margin-top:12px;text-decoration:none}
-.footer{border-top:1px solid var(--border);margin-top:28px;padding:20px;text-align:center;color:var(--muted)}
-@media (max-width:900px){.grid{grid-template-columns:1fr}.hero{font-size:30px}}
 
-/* Accesibilidad menor */
-.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-
-/* Chips meta */
+/* =========================================================
+   Meta Chips, Specs, Breadcrumbs
+   ========================================================= */
 .chiprow{display:flex;flex-wrap:wrap;gap:8px}
-.chip{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border:1px solid var(--border);background:#fff;border-radius:999px;font-size:14px}
+.chip{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:6px 10px;
+  border:1px solid var(--border);
+  background:#fff;
+  border-radius:999px;
+  font-size:14px;
+}
 .chip.emphasis{background:#fff7ed;border-color:#fed7aa}
 
-/* Specs (dt/dd) */
-.specs{display:grid;grid-template-columns:160px 1fr;gap:8px 16px;margin:0}
+.specs{
+  display:grid;
+  grid-template-columns:160px 1fr;
+  gap:8px 16px;
+}
 .specs dt{font-weight:600}
 .specs dd{margin:0}
 
-/* Breadcrumbs / backrow */
-.breadcrumbs{margin:8px 0 12px}
+.breadcrumbs{margin:8px 0 12px;color:var(--muted);font-size:14px}
+.breadcrumbs a{text-decoration:none;color:var(--accent)}
+.breadcrumbs a:hover{text-decoration:underline}
+
 .backrow{display:flex;align-items:center;gap:12px;margin-top:12px}
 .backrow .spacer{flex:1}
 
-/* Medallas (opcional resalte) */
-.rank-item .medal{font-size:18px;}
+/* =========================================================
+   Map
+   ========================================================= */
+.map{height:380px;border-radius:12px;overflow:hidden}
+.leaflet-container{font:inherit}
 
-/* Dark mode suave */
-@media (prefers-color-scheme: dark){
-  :root{--txt:#e5e7eb;--muted:#9ca3af;--bg:#0b0f14;--card:#0f172a;--border:#1f2937}
+/* =========================================================
+   Footer
+   ========================================================= */
+.footer{
+  border-top:1px solid var(--border);
+  margin-top:28px;
+  padding:20px;
+  text-align:center;
+  color:var(--muted);
+  font-size:14px;
+}
+
+/* =========================================================
+   Accesibilidad / SR-only / Motion
+   ========================================================= */
+.sr-only{
+  position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+  overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0
+}
+.sr-only.focusable:focus{
+  position:static;width:auto;height:auto;margin:0;
+  clip:auto;padding:8px 12px;background:#fde68a;color:#111;
+  border-radius:8px;z-index:1000
+}
+.reduce-motion *{animation:none !important;transition:none !important}
+
+/* =========================================================
+   Dark mode
+   ========================================================= */
+@media(prefers-color-scheme: dark){
+  :root{
+    --txt:#e5e7eb;
+    --muted:#9ca3af;
+    --bg:#0b0f14;
+    --card:#0f172a;
+    --border:#1f2937;
+    --accent:#3b82f6;
+    --accent-hover:#2563eb;
+  }
   body{background:var(--bg);color:var(--txt)}
   .card{background:var(--card);border-color:var(--border)}
   .nav a,.brand{color:var(--txt)}
+  .nav a.active{background:var(--accent);color:#fff}
 }
