@@ -26,6 +26,19 @@ Datos, replicabilidad e impacto global.
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 <script>
+const CASES = [
+{% for c in site.cases %}
+{
+  title: {{ c.title | jsonify }},
+  url: "{{ c.url }}",
+  pais: {{ c.pais | jsonify }},
+  lat: {{ c.lat | default: 'null' }},
+  lng: {{ c.lng | default: 'null' }}
+},
+{% endfor %}
+];
+</script>
+
 // ===== Mini-mapa estilo profesional =====
 (function initMap(){
   const el = document.getElementById('home-map');
