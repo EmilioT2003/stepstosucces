@@ -1,27 +1,25 @@
 title: StepsToSucces
-description: Top public-policy ideas & case studies. (ES/EN)
-remote_theme: just-the-docs/just-the-docs
-search_enabled: true
-logo: /assets/logo.svg
+description: "Top public-policy ideas & case studies. (ES/EN)"
 
-# Collections
+# 🔹 No usamos remote_theme porque queremos nuestro layout propio
+theme: null
+
+# Colecciones
 collections:
   cases:
     output: true
     permalink: /cases/:name/
 
+# Plugins útiles
 plugins:
   - jekyll-seo-tag
   - jekyll-sitemap
 
+# URL y dominio
 url: "https://www.stepstosucces.com"
-logo: /assets/logo.svg
+baseurl: ""   # déjalo vacío porque usas dominio con CNAME
 
-# Enlaces rápidos opcionales en top-right
+# Enlaces rápidos opcionales en top-right (si los usas en layout)
 aux_links:
   "GitHub":
     - "https://github.com/EmilioT2003/stepstosucces"
-
-# Activar CSS personalizado
-just_the_docs:
-  custom_css: assets/css/custom.css
