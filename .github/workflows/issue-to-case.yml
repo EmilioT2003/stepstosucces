@@ -1,0 +1,66 @@
+name: Issue → Case file
+
+on:
+  issues:
+    types: [labeled]
+
+jobs:
+  build_case:
+    if: contains(github.event.issue.labels.*.name, 'publicar')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: read
+    steps:
+      - name: Generate case file from Issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = context.payload.issue;
+            const repo = context.repo;
+            // Helpers
+            const slug = issue.title
+              .toLowerCase()
+              .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+              .replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');
+            // Very simple parsing from issue body (fallbacks):
+            const body = issue.body || '';
+            function pick(re, d='') { const m = body.match(re); return m ? m[1].trim() : d; }
+            const titulo = issue.title;
+            const pais = pick(/(?<=^|\n)Pa[ií]s.*?:\s*(.+)/i, '');
+            const sector = pick(/(?<=^|\n)Sector.*?:\s*(.+)/i, '');
+            const anio = pick(/(?<=^|\n)A[ñn]o.*?:\s*(\d{4})/i, '');
+            const resultados = pick(/(?<=^|\n)Resultados.*?:\s*([\s\S]*?)\n(?:\w|$)/i, '').split(/\n|;|,/).map(s=>s.trim()).filter(Boolean);
+            const kpis = pick(/(?<=^|\n)KPI[sS]?.*?:\s*([\s\S]*?)\n(?:\w|$)/i, '').split(/\n|;|,/).map(s=>s.trim()).filter(Boolean);
+            const lat = pick(/(?<=^|\n)lat\s*:\s*([-+]?\d+\.?\d*)/i,'');
+            const lng = pick(/(?<=^|\n)lng\s*:\s*([-+]?\d+\.?\d*)/i,'');
+            const fuentes = pick(/(?<=^|\n)Fuentes.*?:\s*([\s\S]*?)\n(?:\w|$)/i,'')
+              .split(/\n|,|;| |\t/).map(s=>s.trim()).filter(u=>/^https?:\/\//i.test(u));
+
+            const fm = [
+              '---',
+              'layout: case',
+              `title: "${titulo.replace(/"/g,'\\"')}"`,
+              pais ? `pais: "${pais}"` : '',
+              sector ? `sector: [${sector.split(/,|\//).map(s=>`"${s.trim()}"`).join(', ')}]` : '',
+              anio ? `año_inicio: ${anio}` : '',
+              resultados.length ? `resultados: [${resultados.map(r=>`"${r.replace(/"/g,'\\"')}"`).join(', ')}]` : '',
+              kpis.length ? `kpis: [${kpis.map(r=>`"${r.replace(/"/g,'\\"')}"`).join(', ')}]` : '',
+              lat ? `lat: ${lat}` : '',
+              lng ? `lng: ${lng}` : '',
+              'curador: "Emilio"',
+              '---',
+              '',
+              body
+            ].filter(Boolean).join('\n');
+
+            const path = `_cases/${slug}.md`;
+            const message = `Create case from issue #${issue.number}: ${titulo}`;
+            await github.rest.repos.createOrUpdateFileContents({
+              owner: repo.owner,
+              repo: repo.repo,
+              path,
+              message,
+              content: Buffer.from(fm, 'utf8').toString('base64')
+            });
+            core.info(`Case created at ${path}`);
