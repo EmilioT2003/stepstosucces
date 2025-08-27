@@ -22,3 +22,32 @@ body{margin:0;background:var(--bg);color:var(--txt);font-family:Inter,system-ui,
 .back{display:inline-block;margin-top:12px;text-decoration:none}
 .footer{border-top:1px solid var(--border);margin-top:28px;padding:20px;text-align:center;color:var(--muted)}
 @media (max-width:900px){.grid{grid-template-columns:1fr}.hero{font-size:30px}}
+
+/* Accesibilidad menor */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+/* Chips meta */
+.chiprow{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border:1px solid var(--border);background:#fff;border-radius:999px;font-size:14px}
+.chip.emphasis{background:#fff7ed;border-color:#fed7aa}
+
+/* Specs (dt/dd) */
+.specs{display:grid;grid-template-columns:160px 1fr;gap:8px 16px;margin:0}
+.specs dt{font-weight:600}
+.specs dd{margin:0}
+
+/* Breadcrumbs / backrow */
+.breadcrumbs{margin:8px 0 12px}
+.backrow{display:flex;align-items:center;gap:12px;margin-top:12px}
+.backrow .spacer{flex:1}
+
+/* Medallas (opcional resalte) */
+.rank-item .medal{font-size:18px;}
+
+/* Dark mode suave */
+@media (prefers-color-scheme: dark){
+  :root{--txt:#e5e7eb;--muted:#9ca3af;--bg:#0b0f14;--card:#0f172a;--border:#1f2937}
+  body{background:var(--bg);color:var(--txt)}
+  .card{background:var(--card);border-color:var(--border)}
+  .nav a,.brand{color:var(--txt)}
+}
