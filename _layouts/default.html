@@ -1,0 +1,42 @@
+---
+---
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ page.title | default: site.title }}</title>
+
+  <!-- Fuentes opcionales -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Tu CSS -->
+  <link rel="stylesheet" href="{{ '/assets/css/custom.css' | relative_url }}">
+
+  <!-- Leaflet (mapa) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap">
+      <a class="brand" href="{{ '/' | relative_url }}">StepsToSucces</a>
+      <nav class="nav">
+        <a href="{{ '/' | relative_url }}">Mapa</a>
+        <a href="{{ '/ranking/' | relative_url }}">Ranking</a>
+        <a href="{{ '/cases/' | relative_url }}">Casos</a>
+        <a href="{{ '/proponer/' | relative_url }}">Proponer</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    {{ content }}
+  </main>
+
+  <footer class="footer">
+    © {{ site.time | date: "%Y" }} StepsToSucces.com — Building a better future, together.
+  </footer>
+</body>
+</html>
